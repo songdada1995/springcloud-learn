@@ -6,13 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/feign")
 public class FeignController {
 
     @Autowired
     private IService iService;
 
-    @RequestMapping("provider/hello")
-    public String getProvider() {
-        return iService.getProvider();
+    @RequestMapping("/index")
+    public String index() {
+        return iService.hello();
     }
 }
