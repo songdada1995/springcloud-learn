@@ -15,7 +15,7 @@ public class ConsumeController {
     private RestTemplate restTemplate;
 
     @RequestMapping("/hello")
-    public String get(@RequestParam String param) {
-        return restTemplate.getForEntity("http://PROVIDER/provider/hello",String.class).getBody();
+    public String get(@RequestParam String name) {
+        return restTemplate.getForEntity("http://PROVIDER/provider/hello?name="+ name,String.class).getBody();
     }
 }

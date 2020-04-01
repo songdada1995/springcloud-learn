@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>hystrix</artifactId>
+    <artifactId>ribbon</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>hystrix</name>
+    <name>ribbon</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -36,15 +36,23 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.junit/junit -->
+<!--        <dependency>-->
+<!--            <groupId>org.junit</groupId>-->
+<!--            <artifactId>junit</artifactId>-->
+<!--            <version>4.12</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
 
     </dependencies>
 

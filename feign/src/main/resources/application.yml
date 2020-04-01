@@ -1,11 +1,16 @@
 server:
-  port: 8084
+  port: 8083
 
 spring:
   application:
-    name: hystrix
+    name: feign
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8080/eureka
+
+# 启用断路器
+feign:
+  hystrix:
+    enabled: true

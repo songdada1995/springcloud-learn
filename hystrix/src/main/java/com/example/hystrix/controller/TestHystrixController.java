@@ -8,20 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 @RestController
-@RequestMapping("/test")
 public class TestHystrixController {
 
     @Resource
-    private ITestHystrixService iTestHystrixService;
+    private ITestHystrixService testHystrixService;
 
-    @RequestMapping("/hystrix")
-    public String testHystrix(@RequestParam String key){
-        try {
-            return iTestHystrixService.testHystrix(key);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "error";
-        }
+    @RequestMapping("/test/hystrix")
+    public String testHystrix(@RequestParam String name){
+        return testHystrixService.testHystrix(name);
     }
 
 }

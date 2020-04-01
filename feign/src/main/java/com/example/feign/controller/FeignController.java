@@ -1,19 +1,21 @@
 package com.example.feign.controller;
 
-import com.example.feign.api.IService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.feign.service.IService;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("/feign")
 public class FeignController {
 
-    @Autowired
+    @Resource
     private IService iService;
 
-    @RequestMapping("/index")
-    public String index() {
-        return iService.hello();
+    @RequestMapping("/hello")
+    public String hello(@RequestParam String name) {
+        return iService.hello(name);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.hystrix;
+package com.example.ribbon;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class HystrixApplicationTests {
+public class RibbonApplicationTests {
 
     @Test
     public void contextLoads() {
