@@ -25,32 +25,33 @@ import java.util.Properties;
 @MapperScan(basePackages = MybatisPrimaryConfig.SCAN_PACKAGE, sqlSessionFactoryRef = "primarySqlSessionFactory")
 public class MybatisPrimaryConfig {
 
-    public static final String SCAN_PACKAGE = "com.example.consumer.dao.primary";
-    public static final String MAPPER_LOCATION = "classpath*:mapper/primary/*.xml";
+    static final String SCAN_PACKAGE = "com.example.consumer.dao.primary";
+    static final String MAPPER_LOCATION = "classpath*:mapper/primary/*.xml";
+    static final String BEAN_NAME_PREFIX = "primary";
+    static final String DATA_SOURCE_PROPERTIES_PREFIX = "spring.datasource.primary";
+
+    static final String BEAN_SQL_SESSION_FACTORY_NAME = BEAN_NAME_PREFIX + "SqlSessionFactory";
+    static final String BEAN_DATA_SOURCE_NAME = BEAN_NAME_PREFIX + "DataSource";
+    static final String BEAN_TRANSACTION_MANAGER_NAME = BEAN_NAME_PREFIX + "TransactionManager";
+    static final String BEAN_SQL_SESSION_TEMPLATE_NAME = BEAN_NAME_PREFIX + "SqlSessionTemplate";
+    static final String BEAN_MAPPER_HELPER_NAME = BEAN_NAME_PREFIX + "MapperHelper";
 
     @Primary
-    @Bean
-    @ConfigurationProperties(prefix = "spring.datasource.primary")
-    public DruidDataSource primaryDataSource() {
-        DruidDataSource druidDataSource = new DruidDataSource();
-        // 一个连接在池中最小生存的时间(ms),有先后顺序
-        druidDataSource.setMinEvictableIdleTimeMillis(30000);
-        // 一个连接在池中最大生存的时间(ms)
-        druidDataSource.setMaxEvictableIdleTimeMillis(60000);
-        return druidDataSource;
+    @Bean(name = BEAN_DATA_SOURCE_NAME)
+    @ConfigurationProperties(prefix = DATA_SOURCE_PROPERTIES_PREFIX)
+    public DruidDataSource transitDataSource() {
+        return new DruidDataSource();
     }
 
     @Primary
-    @Bean
-    public DataSourceTransactionManager primaryTransactionManager(@Qualifier("primaryDataSource") DataSource dataSource) {
+    @Bean(name = BEAN_TRANSACTION_MANAGER_NAME)
+    public DataSourceTransactionManager transactionManager(@Qualifier(value = BEAN_DATA_SOURCE_NAME) DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
     @Primary
-    @Bean
-    public SqlSessionFactory primarySqlSessionFactory(
-            @Qualifier("primaryDataSource") DataSource dataSource
-    ) throws Exception {
+    @Bean(name = BEAN_SQL_SESSION_FACTORY_NAME)
+    public SqlSessionFactory sqlSessionFactory(@Qualifier(value = BEAN_DATA_SOURCE_NAME) DataSource dataSource) throws Exception {
         final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
 
@@ -77,19 +78,13 @@ public class MybatisPrimaryConfig {
     }
 
     @Primary
-    @Bean
-    public SqlSessionTemplate primaryTestSqlSessionTemplate(@Qualifier("primarySqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
+    @Bean(name = BEAN_SQL_SESSION_TEMPLATE_NAME)
+    public SqlSessionTemplate sqlSessionTemplate(@Qualifier(value = BEAN_SQL_SESSION_FACTORY_NAME) SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 
-    /**
-     * Mybatis 通用Mapper配置
-     *
-     * @param sqlSessionFactory
-     * @return
-     */
-    @Bean
-    public MapperHelper primaryMapperHelper(@Qualifier("primarySqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
+    @Bean(name = BEAN_MAPPER_HELPER_NAME)
+    public MapperHelper mapperHelper(@Qualifier(value = BEAN_SQL_SESSION_FACTORY_NAME) SqlSessionFactory sqlSessionFactory) {
         MapperHelper mapperHelper = new MapperHelper();
         //特殊配置
         Config config = new Config();
