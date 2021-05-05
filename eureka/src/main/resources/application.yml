@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: eureka-server
+
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+    #实例是否在eureka服务器上注册自己的信息以供其他服务发现，默认为true
+    registerWithEureka: false
+    #此客户端是否获取eureka服务器注册表上的注册信息，默认为true
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/

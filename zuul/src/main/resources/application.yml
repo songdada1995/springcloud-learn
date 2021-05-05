@@ -1,0 +1,20 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: mycloud-zuul
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8080/eureka
+
+zuul:
+  routes:
+    api-a:
+      path: /api-a/**
+      serviceId: feign
+    api-b:
+      path: /api-b/**
+      serviceId: ribbon

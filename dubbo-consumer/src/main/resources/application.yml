@@ -1,0 +1,39 @@
+server:
+  port: 8089
+
+spring:
+  application:
+    name: mycloud-dubbo-consumer
+
+  datasource:
+    primary:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=true&allowMultiQueries=true&autoReconnect=true
+      username: root
+      password: root
+
+      remove-abandoned: true
+      remove-abandoned-timeout: 10000
+      log-abandoned: true
+      max-active: 10
+      min-idle: 2
+      initial-size: 2
+      max-wait: 10000
+      validation-query: SELECT 1 FROM DUAL
+      test-on-borrow: true
+      test-while-idle: true
+      time-between-eviction-runs-millis: 20000
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8080/eureka/
+
+# thread pool
+thread:
+  pool:
+    corePoolSize: 2
+    maximumPoolSize: 5
+    keepAliveTime: 100
+    capacity: 5
