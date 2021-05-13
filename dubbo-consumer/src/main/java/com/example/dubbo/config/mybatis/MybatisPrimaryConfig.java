@@ -1,4 +1,4 @@
-package com.example.dubbo.provider.config.mybatis;
+package com.example.dubbo.config.mybatis;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.github.pagehelper.PageInterceptor;
@@ -31,7 +31,7 @@ import java.util.Properties;
 public class MybatisPrimaryConfig {
 
     /* 多数据原配置 - 修改开始 */
-    static final String SCAN_PACKAGE = "com.example.dubbo.provider.dao.primary";
+    static final String SCAN_PACKAGE = "com.example.dubbo.consumer.dao.primary";
     static final String MAPPER_LOCATION = "classpath*:mapper/primary/*.xml";
     static final String DATA_SOURCE_PROPERTIES_PREFIX = "spring.datasource.primary";
     static final String BEAN_NAME_PREFIX = "primary";

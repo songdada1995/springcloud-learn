@@ -1,4 +1,4 @@
-package com.example.dubbo.provider;
+package com.example.dubbo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

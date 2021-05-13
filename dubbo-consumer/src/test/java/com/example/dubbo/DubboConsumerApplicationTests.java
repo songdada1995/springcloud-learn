@@ -1,4 +1,4 @@
-package com.example.dubbo.consumer;
+package com.example.dubbo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

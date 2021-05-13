@@ -1,10 +1,10 @@
-package com.example.dubbo.provider;
+package com.example.dubbo;
 
+import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
-@EnableEurekaClient
+@EnableDubbo
 @SpringBootApplication
 public class DubboProviderApplication {
 

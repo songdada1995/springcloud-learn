@@ -1,4 +1,4 @@
-package com.example.dubbo.consumer.dao.core;
+package com.example.dubbo.dao.core;
 
 import tk.mybatis.mapper.common.BaseMapper;
 import tk.mybatis.mapper.common.ConditionMapper;

@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: mycloud-dubbo-consumer
+    name: mydubbo-consumer
 
   datasource:
     primary:
@@ -25,10 +25,23 @@ spring:
       time-between-eviction-runs-millis: 20000
 
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://127.0.0.1:8080/eureka/
+dubbo:
+  application:
+    id: dubbo-consumer
+    name: dubbo-consumer  #应用名称
+    owner: songdada       #应用所属者
+    organization: songdada   #应用所属组织
+  registry:
+    id: zookeeper-registry #注册中心id
+    protocol: zookeeper    #注册中心协议
+    address: zookeeper://127.0.0.1:2181 #注册中心地址
+#  monitor:
+#    protocol: registry # 注册监控中心
+  scan:
+    base-packages: com.example.dubbo.consumer.service
+
+service:
+  version: 1.0.0
 
 # thread pool
 thread:
